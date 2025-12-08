@@ -201,7 +201,6 @@
     "You may not delete your personal team.": "No se puede borrar su equipo personal.",
     "You may not leave a team that you created.": "No se puede abandonar un equipo que usted creó.",
     "Your email address is not verified.": "Su dirección de correo electrónico no está verificada.",
-    "status:pending": "Pendiente",
     "status:starting": "Leyendo",
     "status:progress": "Procesando",
     "status:reading": "Procesando",
@@ -269,5 +268,16 @@
     "Users": "Usuarios",
     "Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Antes de continuar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que acabamos de enviarte? Si no recibiste el correo electrónico, con gusto te enviaremos otro.",
     "A new verification link has been sent to the email address you provided in your profile settings.": "Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionaste en la configuración de tu perfil.",
-    "Edit Profile": "Editar Perfil"
+    "Edit Profile": "Editar Perfil",
+    "Sign in to your account": "Inicia sesión en tu cuenta",
+    "Not a member?": "¿No eres miembro?",
+    "Sign up with us": "Regístrate con nosotros",
+    "Create Your Account": "Crea tu cuenta",
+    "Join our community and start enjoying exclusive benefits. It only takes a few minutes to get started!": "Únete a nuestra comunidad y comienza a disfrutar de beneficios exclusivos. ¡Solo te tomará unos minutos empezar!",
+    "About us": "Nosotros",
+    "Contact": "Contacto",
+    "status:pending": "Pendiente",
+    "status:scheduled": "Programado",
+    "status:completed": "Finalizada",
+    "status:cancelled": "Cancelada"
 }

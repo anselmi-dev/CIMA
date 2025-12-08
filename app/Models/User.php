@@ -10,8 +10,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasAvatar
 {
     use HasApiTokens;
     use HasRoles;
@@ -19,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -27,12 +32,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
-        'lastname',
+        'last_name',
+        'profile_photo_path',
         'email',
-        'rut',
-        'phone',
-        'university',
-        'studies',
         'password'
     ];
 
@@ -69,5 +71,34 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-    
+
+    public function getProfilePhotoUrlAttribute(): ?string
+    {
+        return url('storage/'.$this->profile_photo_path);
+    }
+ 
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url;
+    }
+
+    public function getFilamentName(): string
+    {
+        return "{$this->name} {$this->last_name}";
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+
+        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
+    }
+
+    /**
+     * Get the professional that owns the portfolio.
+     */
+    public function professional()
+    {
+        return $this->hasOne(Professional::class);
+    }
 }

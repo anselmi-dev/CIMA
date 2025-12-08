@@ -5,9 +5,9 @@
                 {{ __('Sign in to your account') }}
             </h2>
             <p class="mt-2 text-sm leading-6 text-gray-500">
-                Not a member?
-                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Start a 14 day free trial
+                {{ __('Not a member?') }}
+                <a href="{{ route('register') }}" class="font-semibold text-A1-default hover:text-A1-hover">
+                    {{ __('Sign up with us') }}
                 </a>
             </p>
         </x-slot>
@@ -27,6 +27,9 @@
                 <x-label for="email" value="{{ __('Email') }}" />
                 <div class="mt-2">
                     <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                    aria-placeholder="{{ __('Email') }}"
+                    icon="at-symbol"
+                    placeholder="{{ __('Email') }}"
                         required autofocus autocomplete="username" />
                 </div>
             </div>
@@ -35,6 +38,9 @@
                 <x-label for="password" value="{{ __('Password') }}" />
                 <div class="mt-2">
                     <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                        icon="lock-closed"
+                        aria-placeholder="{{ __('Password') }}"
+                        placeholder="{{ __('Password') }}"
                         autocomplete="current-password" />
                 </div>
             </div>
@@ -59,9 +65,9 @@
             </div>
 
             <div>
-                <x-wireui-button type="submit" primary class="w-full">
+                <x-filament::button type="submit" primary class="w-full">
                     {{ __('Sign In') }}
-                </x-wireui-button>
+                </x-filament::button>
             </div>
         </form>
 
@@ -77,9 +83,9 @@
 
             <div class="mt-3 grid grid-cols-1 gap-4 text-center">
                 <div>
-                    <x-wireui-button href="{{ route('register') }}" flat primary>
+                    <x-filament::button href="{{ route('register') }}" flat primary>
                         {{ __('Register') }}
-                    </x-wireui-button>
+                    </x-filament::button>
                 </div>
             </div>
         </div>

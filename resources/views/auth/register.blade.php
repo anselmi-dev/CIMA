@@ -1,7 +1,16 @@
 <x-guest-layout>
-    <x-authentication-card>
+    <x-authentication-card image="{{ asset('images/auth/bg-register.jpg') }}">
         <x-slot name="logo">
             <x-authentication-card-logo />
+        </x-slot>
+
+        <x-slot name="head">
+            <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                {{ __("Create Your Account") }}
+            </h2>
+            <p class="mt-2 text-sm leading-6 text-gray-500">
+                {{ __("Join our community and start enjoying exclusive benefits. It only takes a few minutes to get started!") }}
+            </p>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -11,56 +20,100 @@
 
             <div>
                 <x-label for="rut" value="{{ __('RUT') }}" />
-                <x-input id="rut" class="block mt-1 w-full" type="text" name="rut" :value="old('rut')" required
+                <x-input id="rut"
+                    class="block mt-1 w-full"
+                    type="text"
+                    name="rut"
+                    :value="old('rut')"
+                    required
+                    aria-placeholder="{{ __('RUT') }}"
+                    placeholder="{{ __('RUT') }}"
+                    icon="identification"
                     autocomplete="rut" />
             </div>
 
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                    autofocus autocomplete="name" />
-            </div>
-
-            <div>
-                <x-label for="lastname" value="{{ __('Lastname') }}" />
-                <x-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required
-                    autocomplete="lastname" />
+            <div class="grid md:grid-cols-2 space-y-6 md:space-x-6 md:space-y-0">
+                <div>
+                    <x-label for="name" value="{{ __('Name') }}" />
+                    <x-input id="name"
+                        class="block mt-1 w-full"
+                        type="text"
+                        name="name"
+                        :value="old('name')"
+                        required
+                        aria-placeholder="{{ __('Name') }}"
+                        placeholder="{{ __('Name') }}"
+                        autofocus autocomplete="name" />
+                </div>
+    
+                <div>
+                    <x-label for="lastname" value="{{ __('Lastname') }}" />
+                    <x-input id="lastname"
+                        class="block mt-1 w-full"
+                        type="text"
+                        name="lastname"
+                        :value="old('lastname')"
+                        required
+                        aria-placeholder="{{ __('Lastname') }}"
+                        placeholder="{{ __('Lastname') }}"
+                        autocomplete="lastname" />
+                </div>
             </div>
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                <x-input id="email"
+                    class="block mt-1 w-full"
+                    type="email"
+                    name="email"
+                    :value="old('email')"
+                    required
+                    aria-placeholder="{{ __('Email') }}"
+                    icon="at-symbol"
+                    placeholder="{{ __('Email') }}"
                     autocomplete="username" />
             </div>
 
             <div>
                 <x-label for="phone" value="{{ __('Phone') }}" />
-                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required
+                <x-input
+                    id="phone"
+                    class="block mt-1 w-full"
+                    type="text"
+                    name="phone"
+                    :value="old('phone')"
+                    required
+                    aria-placeholder="{{ __('Phone') }}"
+                    placeholder="{{ __('Phone') }}"
+                    icon="phone"
                     autocomplete="phone" />
             </div>
 
             <div>
-                <x-label for="university" value="{{ __('Universidad') }}" />
-                <x-input id="university" class="block mt-1 w-full" type="text" name="university" :value="old('university')" required
-                    autocomplete="university" />
-            </div>
-
-            <div>
-                <x-label for="studies" value="{{ __('Universidad') }}" />
-                <x-input id="studies" class="block mt-1 w-full" type="text" name="studies" :value="old('studies')" required
-                    autocomplete="studies" />
-            </div>
-
-            <div>
                 <x-label for="studies" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                <x-input id="password"
+                    class="block mt-1 w-full"
+                    type="password"
+                    name="password"
+                    required
+                    icon="lock-closed"
+                    aria-placeholder="{{ __('Password') }}"
+                    placeholder="{{ __('Password') }}"
                     autocomplete="new-password" />
             </div>
 
             <div>
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                    name="password_confirmation" required autocomplete="new-password" />
+                <x-input
+                    id="password_confirmation"
+                    class="block mt-1 w-full"
+                    type="password"
+                    icon="lock-closed"
+                    aria-placeholder="{{ __('Confirm Password') }}"
+                    placeholder="{{ __('Confirm Password') }}"
+                    name="password_confirmation"
+                    required
+                    autocomplete="new-password" />
             </div>
 
             @if(Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -83,9 +136,9 @@
             @endif
 
             <div>
-                <x-wireui-button type="submit" primary class="w-full">
+                <x-filament::button type="submit" primary class="w-full">
                     {{ __('Register') }}
-                </x-wireui-button>
+                </x-filament::button>
             </div>
         </form>
 
@@ -103,9 +156,9 @@
 
             <div class="mt-3 grid grid-cols-1 gap-4 text-center">
                 <div>
-                    <x-wireui-button href="{{ route('login') }}" flat primary>
+                    <x-filament::button href="{{ route('login') }}" flat primary>
                         {{ __('Sign In') }}
-                    </x-wireui-button>
+                    </x-filament::button>
                 </div>
             </div>
         </div>

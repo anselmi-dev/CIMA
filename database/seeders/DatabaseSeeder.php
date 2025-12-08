@@ -16,6 +16,12 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
+            BankSeeder::class,
+            MedicalSpecialtySeeder::class,
+            ProfessionalSeeder::class,
+            AdminBankAccountSeeder::class,
+            AppointmentSeeder::class,
+            PatientSeeder::class,
             UserAndRoleSeeder::class
         ]);
     }

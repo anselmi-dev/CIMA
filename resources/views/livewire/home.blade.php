@@ -1,437 +1,219 @@
-<div class="bg-white">
-    <!-- Hero section -->
-    <div class="relative pt-14">
+<div>
+    <div
+        class="h-min-screen h-screen w-full max-w-full relative isolate overflow-hidden bg-gray-900 pt-14 pb-16 sm:pb-20">
+
+        <x-layouts.parts.blend-multiply class="opacity-30" />
+
+        <div class="absolute inset-0 -z-10 size-full object-cover">
+            <video class="wp-block-cover__video-background intrinsic-ignore size-full object-cover" autoplay=""
+                muted="" loop="" playsinline=""
+                src="https://cer.cl/wp-content/uploads/2025/02/cer-cl-video-home.mp4" data-object-fit="cover"></video>
+        </div>
+
         <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true">
-            <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            <div class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                 style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
             </div>
         </div>
-        <div class="py-24 sm:py-32">
-            <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                <div class="mx-auto max-w-2xl text-center">
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Deploy to the cloud with
-                        confidence</h1>
-                    <p class="mt-6 text-lg leading-8 text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt.
-                        Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
-                    <div class="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="#"
-                            class="rounded-md bg-A1-default px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-A1-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-A1-hover">
-                            Get started
+
+
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 z-1 relative h-full flex items-center justify-center">
+            <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                        <x-layouts.parts.crossed-out>Tu salud</x-layouts.parts.crossed-out> en las mejores manos
+                    </h1>
+                    <p class="mt-6 text-lg leading-8 text-white sm:max-w-md lg:max-w-none">
+                        {{ __('En CIMA, conectamos pacientes con especialistas médicos de primer nivel en Chile. Reserva tu cita fácilmente y accede a la atención que necesitas para cuidar de tu bienestar. Salud a tu alcance, con solo un clic.') }}
+                    </p>
+                    <div class="mt-10 flex items-center gap-x-6 text-center mx-auto justify-center">
+                        <a href="{{ route('schedule.index') }}"
+                            class="rounded-md bg-A1-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-A1-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-A1-600">
+                            {{ __('Agendar cita') }}
                         </a>
-                        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span
-                                aria-hidden="true">→</span></a>
+                        <a href="{{ route('contact') }}" class="text-sm font-semibold leading-6 text-white">
+                            {{ __('Contáctanos') }}
+                            <span aria-hidden="true">→</span>
+                        </a>
                     </div>
                 </div>
-                <div class="mt-16 flow-root sm:mt-24">
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto flex flex-col space-y-32 px-6 lg:px-8">
+        <div class="py-24 sm:py-32">
+            <div class="mx-auto max-w-7xl">
+                <div class="mx-auto max-w-5xl lg:mx-0">
+                    <h2 class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                        En <x-layouts.parts.crossed-out>Clinica Cer</x-layouts.parts.crossed-out> somos especialista en
+                        tratar los problemas de fertilidad.
+                    </h2>
+                    <p class="mt-6 text-base/7 text-gray-600">
+                        Todos nuestros Ginecólogos poseen la subespecialidad en infertilidad.
+                        Estamos acreditados por RED LARA en categoría GOLD, siendo esta la máxima distinción que
+                        certifica
+                        la excelencia en los procesos y en los resultados de nuestros profesionales, quienes son
+                        expertos en
+                        técnicas de reproducción asistida de baja y alta complejidad.</p>
+                </div>
+                <div
+                    class="mx-auto mt-16 flex max-w-2xl flex-col gap-8 lg:mx-0 lg:mt-20 lg:max-w-none lg:flex-row lg:items-end">
                     <div
-                        class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                        <img src="https://tailwindui.com/img/component-images/project-app-screenshot.png"
-                            alt="App screenshot" width="2432" height="1442"
-                            class="rounded-md shadow-2xl ring-1 ring-gray-900/10">
+                        class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A1-500 p-8 sm:w-3/4 sm:max-w-md sm:flex-row-reverse sm:items-end lg:w-72 lg:max-w-none lg:flex-none lg:flex-col lg:items-start">
+                        <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
+                        <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
+                            <p class="text-lg font-semibold tracking-tight text-white uppercase">
+                                Agenda tu hora en Clínica CER
+                            </p>
+                            <p class="mt-2 text-base/7 text-white">Somos especialistas en tratar la infertilidad.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A2-500 p-8 sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-sm lg:flex-auto lg:flex-col lg:items-start lg:gap-y-30">
+                        <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
+                        <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
+                            <p class="text-lg font-semibold tracking-tight text-white">BONO PAD FONASA ALTA Y BAJA
+                                COMPLEJIDAD</p>
+                            <p class="mt-2 text-base/7 text-white">En nuestro país, el 14% de las parejas en edad
+                                reproductiva sufren de algún trastorno de fertilidad (Aproximadamente 250.000
+                                parejas).</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A3-500 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28">
+                        <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
+                        <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
+                            <p class="text-lg font-semibold tracking-tight text-white">PROGRAMA DE OVORECEPCIÓN</p>
+                            <p class="mt-2 text-base/7 text-white">Eu duis porta aliquam ornare. Elementum eget
+                                magna
+                                egestas. Eu duis porta aliquam ornare.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A4-500 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-20">
+                        <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
+                        <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
+                            <p class="text-lg font-semibold tracking-tight text-white">QUIERO SER DONANTE</p>
+                            <p class="mt-2 text-base/7 text-white">Actualmente en Chile, la tasa de
+                                infertilidad oscila
+                                entre el 13% y el 15% de la población en edad reproductiva.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-            aria-hidden="true">
-            <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-            </div>
-        </div>
-    </div>
 
-    <!-- Logo cloud -->
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div
-            class="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-            <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158"
-                height="48">
-            <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158"
-                height="48">
-            <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158"
-                height="48">
-            <img class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158"
-                height="48">
-            <img class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158"
-                height="48">
-        </div>
-        <div class="mt-16 flex justify-center">
-            <p
-                class="relative rounded-full px-4 py-1.5 text-sm leading-6 text-gray-600 ring-1 ring-inset ring-gray-900/10 hover:ring-gray-900/20">
-                <span class="hidden md:inline">Transistor saves up to $40,000 per year, per employee by working with
-                    us.</span>
-                <a href="#" class="font-semibold text-indigo-600"><span class="absolute inset-0"
-                        aria-hidden="true"></span> Read our case study <span aria-hidden="true">&rarr;</span></a>
-            </p>
-        </div>
-    </div>
-
-    <!-- Feature section -->
-    <div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:text-center">
-            <h2 class="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
-            <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything you need to deploy
-                your app</p>
-            <p class="mt-6 text-lg leading-8 text-gray-600">Quis tellus eget adipiscing convallis sit sit eget aliquet
-                quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
-        </div>
-        <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-                <div class="relative pl-16">
-                    <dt class="text-base font-semibold leading-7 text-gray-900">
-                        <div
-                            class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                            </svg>
-                        </div>
-                        Push to deploy
-                    </dt>
-                    <dd class="mt-2 text-base leading-7 text-gray-600">Morbi viverra dui mi arcu sed. Tellus semper
-                        adipiscing suspendisse semper morbi. Odio urna massa nunc massa.</dd>
-                </div>
-                <div class="relative pl-16">
-                    <dt class="text-base font-semibold leading-7 text-gray-900">
-                        <div
-                            class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                            </svg>
-                        </div>
-                        SSL certificates
-                    </dt>
-                    <dd class="mt-2 text-base leading-7 text-gray-600">Sit quis amet rutrum tellus ullamcorper ultricies
-                        libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.</dd>
-                </div>
-                <div class="relative pl-16">
-                    <dt class="text-base font-semibold leading-7 text-gray-900">
-                        <div
-                            class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                            </svg>
-                        </div>
-                        Simple queues
-                    </dt>
-                    <dd class="mt-2 text-base leading-7 text-gray-600">Quisque est vel vulputate cursus. Risus proin
-                        diam nunc commodo. Lobortis auctor congue commodo diam neque.</dd>
-                </div>
-                <div class="relative pl-16">
-                    <dt class="text-base font-semibold leading-7 text-gray-900">
-                        <div
-                            class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
-                            </svg>
-                        </div>
-                        Advanced security
-                    </dt>
-                    <dd class="mt-2 text-base leading-7 text-gray-600">Arcu egestas dolor vel iaculis in ipsum mauris.
-                        Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.</dd>
-                </div>
-            </dl>
-        </div>
-    </div>
-
-    <!-- Testimonial section -->
-    <div class="mx-auto mt-32 max-w-7xl sm:mt-56 sm:px-6 lg:px-8">
-        <div
-            class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
-            <img class="absolute inset-0 h-full w-full object-cover brightness-150 saturate-0"
-                src="https://images.unsplash.com/photo-1601381718415-a05fb0a261f3?ixid=MXwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8ODl8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1216&q=80"
-                alt="">
-            <div class="absolute inset-0 bg-gray-900/90 mix-blend-multiply"></div>
-            <div class="absolute -left-80 -top-56 transform-gpu blur-3xl" aria-hidden="true">
-                <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-r from-[#ff4694] to-[#776fff] opacity-[0.45]"
-                    style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-                </div>
-            </div>
-            <div class="hidden md:absolute md:bottom-16 md:left-[50rem] md:block md:transform-gpu md:blur-3xl"
-                aria-hidden="true">
-                <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-r from-[#ff4694] to-[#776fff] opacity-25"
-                    style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-                </div>
-            </div>
-            <div class="relative mx-auto max-w-2xl lg:mx-0">
-                <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workcation-logo-white.svg" alt="">
-                <figure>
-                    <blockquote class="mt-6 text-lg font-semibold text-white sm:text-xl sm:leading-8">
-                        <p>“Amet amet eget scelerisque tellus sit neque faucibus non eleifend. Integer eu praesent at a.
-                            Ornare arcu gravida natoque erat et cursus tortor consequat at. Vulputate gravida sociis
-                            enim nullam ultricies habitant malesuada lorem ac.”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 text-base text-white">
-                        <div class="font-semibold">Judith Black</div>
-                        <div class="mt-1">CEO of Tuple</div>
-                    </figcaption>
-                </figure>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pricing section -->
-    <div class="py-24 sm:pt-48">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-4xl text-center">
-                <h2 class="text-base font-semibold leading-7 text-indigo-600">Pricing</h2>
-                <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Pricing plans for teams
-                    of&nbsp;all&nbsp;sizes</p>
-            </div>
-            <p class="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">Distinctio et nulla eum soluta
-                et neque labore quibusdam. Saepe et quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.
-            </p>
+        <div class="relative bg-gray-900 rounded-2xl">
             <div
-                class="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-                <div
-                    class="flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-gray-200 lg:mt-8 lg:rounded-r-none xl:p-10">
-                    <div>
-                        <div class="flex items-center justify-between gap-x-4">
-                            <h3 id="tier-freelancer" class="text-lg font-semibold leading-8 text-gray-900">Freelancer
-                            </h3>
-                        </div>
-                        <p class="mt-4 text-sm leading-6 text-gray-600">The essentials to provide your best work for
-                            clients.</p>
-                        <p class="mt-6 flex items-baseline gap-x-1">
-                            <span class="text-4xl font-bold tracking-tight text-gray-900">$24</span>
-                            <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
-                        </p>
-                        <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600">
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                5 products
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Up to 1,000 subscribers
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Basic analytics
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                48-hour support response time
-                            </li>
-                        </ul>
+                class="relative h-80 overflow-hidden bg-A1-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2 rounded-l-2xl">
+                <img class="size-full object-cover" src="{{ asset('images/home/card-3.jpg') }}" alt="">
+                <x-layouts.parts.blend-multiply class="opacity-60" />
+            </div>
+            <div class="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
+                <div class="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2 lg:pl-24 lg:pr-0 xl:pl-32">
+                    <h2 class="text-base/7 font-semibold text-A1-400">Equipo Profesional</h2>
+                    <p class="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">¡La experiencia nos
+                        avala!
+                    </p>
+                    <p class="mt-6 text-base/7 text-gray-300">
+                        Nuestros profesionales se han dedicado por más de 30 años a investigar, estudiar y tratar
+                        los
+                        problemas de fertilidad. Hemos construido un lugar accesible a todas las personas que así lo
+                        necesitan. Nuestras tasas de éxito se destacan por sobre el promedio Nacional e
+                        Internacional.
+                    </p>
+                    <div class="mt-8">
+                        <a href="#"
+                            class="inline-flex rounded-md bg-A1-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                            Ver equipo profesional →
+                        </a>
                     </div>
-                    <a href="#" aria-describedby="tier-freelancer"
-                        class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buy
-                        plan</a>
-                </div>
-                <div
-                    class="flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-gray-200 lg:z-10 lg:rounded-b-none xl:p-10">
-                    <div>
-                        <div class="flex items-center justify-between gap-x-4">
-                            <h3 id="tier-startup" class="text-lg font-semibold leading-8 text-indigo-600">Startup</h3>
-                            <p
-                                class="rounded-full bg-indigo-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-indigo-600">
-                                Most popular</p>
-                        </div>
-                        <p class="mt-4 text-sm leading-6 text-gray-600">A plan that scales with your rapidly growing
-                            business.</p>
-                        <p class="mt-6 flex items-baseline gap-x-1">
-                            <span class="text-4xl font-bold tracking-tight text-gray-900">$32</span>
-                            <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
-                        </p>
-                        <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600">
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                25 products
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Up to 10,000 subscribers
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Advanced analytics
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                24-hour support response time
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Marketing automations
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="#" aria-describedby="tier-startup"
-                        class="mt-8 block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buy
-                        plan</a>
-                </div>
-                <div
-                    class="flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-gray-200 lg:mt-8 lg:rounded-l-none xl:p-10">
-                    <div>
-                        <div class="flex items-center justify-between gap-x-4">
-                            <h3 id="tier-enterprise" class="text-lg font-semibold leading-8 text-gray-900">Enterprise
-                            </h3>
-                        </div>
-                        <p class="mt-4 text-sm leading-6 text-gray-600">Dedicated support and infrastructure for your
-                            company.</p>
-                        <p class="mt-6 flex items-baseline gap-x-1">
-                            <span class="text-4xl font-bold tracking-tight text-gray-900">$48</span>
-                            <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
-                        </p>
-                        <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600">
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Unlimited products
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Unlimited subscribers
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Advanced analytics
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                1-hour, dedicated support response time
-                            </li>
-                            <li class="flex gap-x-3">
-                                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Marketing automations
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="#" aria-describedby="tier-enterprise"
-                        class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buy
-                        plan</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- FAQs -->
-    <div
-        class="mx-auto max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
-        <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
-        <dl class="mt-10 space-y-8 divide-y divide-gray-900/10">
-            <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
-                <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">What&#039;s the best thing
-                    about Switzerland?</dt>
-                <dd class="mt-4 lg:col-span-7 lg:mt-0">
-                    <p class="text-base leading-7 text-gray-600">I don&#039;t know, but the flag is a big plus. Lorem
-                        ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</p>
-                </dd>
+        <section>
+            <div class="mx-auto max-w-7xl">
+                <div
+                    class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
+                    <img class="absolute inset-0 size-full object-cover brightness-150 saturate-0"
+                        src="https://cer.cl/wp-content/uploads/2022/01/manos-cer-cl.jpg" alt="">
+                    <x-layouts.parts.blend-multiply />
+                    <div class="relative mx-auto max-w-2xl lg:mx-0">
+                        <figure>
+                            <blockquote class="mt-6 text-lg font-semibold text-white sm:text-xl/8">
+                                <p>
+                                    ESTAMOS CONTIGO EN CADA ETAPA DEL PROCESO
+                                </p>
+                            </blockquote>
+                            <figcaption class="mt-6 text-base text-white">
+                                <div class="font-semibold">Ver Testimonios→</div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- More questions... -->
-        </dl>
-    </div>
+        <section>
+            <div class="mx-auto max-w-7xl">
+                <div
+                    class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
+                    <img class="absolute inset-0 size-full object-cover brightness-150 saturate-0"
+                        src="https://cer.cl/wp-content/uploads/2022/06/nuevo-familias-cer-cl-scaled.jpg" alt="">
+                    <x-layouts.parts.blend-multiply />
+                    <div class="relative mx-auto max-w-2xl lg:mr-0 lg:text-right">
+                        <figure>
+                            <blockquote class="mt-6 text-lg font-semibold text-white sm:text-xl/8">
+                                <p>
+                                    JUNTOS, EN EL CAMINO A FORMAR TU FAMILIA.
+                                </p>
+                            </blockquote>
+                            <figcaption class="mt-6 text-base text-white">
+                                <div class="font-semibold"> ← Ver Tratamientos</div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- CTA section -->
-    <div class="relative -z-10 mt-32 px-6 lg:px-8">
-        <div class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 transform-gpu justify-center overflow-hidden blur-3xl sm:bottom-0 sm:right-[calc(50%-6rem)] sm:top-auto sm:translate-y-0 sm:transform-gpu sm:justify-end"
-            aria-hidden="true">
-            <div class="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#ff80b5] to-[#9089fc] opacity-25"
-                style="clip-path: polygon(73.6% 48.6%, 91.7% 88.5%, 100% 53.9%, 97.4% 18.1%, 92.5% 15.4%, 75.7% 36.3%, 55.3% 52.8%, 46.5% 50.9%, 45% 37.4%, 50.3% 13.1%, 21.3% 36.2%, 0.1% 0.1%, 5.4% 49.1%, 21.4% 36.4%, 58.9% 100%, 73.6% 48.6%)">
+        <section>
+            <div class="mx-auto max-w-7xl">
+                <div
+                    class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
+                    <img class="absolute inset-0 size-full object-cover brightness-150 saturate-0"
+                        src="https://cer.cl/wp-content/uploads/2022/06/coches-cer-cl.jpg" alt="">
+                    <x-layouts.parts.blend-multiply />
+                    <div class="relative mx-auto max-w-2xl lg:mx-0">
+                        <figure>
+                            <blockquote class="mt-6 text-lg font-semibold text-white sm:text-xl/8">
+                                <p>
+                                    JUNTOS FORMAREMOS TU PROPIO MODELO DE FAMILIA
+                                </p>
+                            </blockquote>
+                            <figcaption class="mt-6 text-base text-white">
+                                <div class="font-semibold">Ver modelos de familias→</div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="mx-auto max-w-2xl text-center">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Boost your productivity.<br>Start
-                using our app today.</h2>
-            <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">Incididunt sint fugiat pariatur cupidatat
-                consectetur sit cillum anim id veniam aliqua proident excepteur commodo do ea.</p>
-            <div class="mt-10 flex items-center justify-center gap-x-6">
-                <a href="#"
-                    class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get
-                    started</a>
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span
-                        aria-hidden="true">→</span></a>
+        </section>
+
+        <section>
+            <div class="px-6 sm:px-6 sm:pb-32 lg:px-8">
+                <div class="mx-auto max-w-2xl text-center">
+                    <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                        ¿Tienes dudas?</h2>
+                    <p class="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-600">Revisa nuestras preguntas
+                        frecuentes y glosario de términos o simplemente escríbenos a
+                        <x-layouts.parts.crossed-out>info@cer.cl</x-layouts.parts.crossed-out></p>
+                </div>
             </div>
-        </div>
-        <div class="absolute left-1/2 right-0 top-full -z-10 hidden -translate-y-1/2 transform-gpu overflow-hidden blur-3xl sm:block"
-            aria-hidden="true">
-            <div class="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
-                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-            </div>
-        </div>
+        </section>
     </div>
 </div>

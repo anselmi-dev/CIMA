@@ -11,6 +11,13 @@ use App\Livewire\{
     TermsAndConditions,
     PrivacyPolicy,
     CookiesPolicy,
+    Professional,
+    Professionals,
+    Schedule,
+    ScheduleSuccess,
+    ScheduleConfirm,
+    ScheduleCanceled,
+    Schedule\SpecialitySchedule
 };
 
 Route::get('/', Home::class)->name('home');
@@ -28,6 +35,41 @@ Route::get('terminos-y-condiciones', TermsAndConditions::class)->name('terms-and
 Route::get('política-de-privacidad', PrivacyPolicy::class)->name('privacy-policy');
 
 Route::get('política-de-cookies', CookiesPolicy::class)->name('cokies-policy');
+
+Route::get('agendar/', SpecialitySchedule::class)->name('schedule.index');
+Route::get('agendar/{medicalSpecialty:slug}', Schedule::class)->name('schedule');
+Route::get('agendar/cita/{appointment:uuid}', ScheduleSuccess::class)->name('schedule.success');
+Route::get('agendar/cita/{appointment:uuid}/confirmacion', ScheduleConfirm::class)->name('schedule.confirm');
+Route::get('agendar/cita/{appointment:uuid}/cancelada', ScheduleCanceled::class)->name('schedule.canceled');
+
+Route::get('profesionales', Professionals::class)->name('professionals');
+
+Route::get('profesional/{professional:slug}', Professional::class)->name('professional');
+
+Route::get('test', function () {
+    $appointment = \App\Models\Appointment::first();
+
+    $appointment->status = 'confirmed';
+
+    // $appointment->update([
+    //     'status' => 'confirmed'
+
+    // ]);
+    $appointment->save();
+
+    
+    return (new \App\Mail\AppointmentToPatientCreated($appointment))->render();
+
+    return \Mail::to('carlosanselmi2@gmail.com')->send(new \App\Mail\AppointmentToPatientCreated($appointment));
+});
+
+Route::get('test-cancel', function () {
+    $appointment = \App\Models\Appointment::first();
+
+    return (new \App\Mail\AppointmentToPatientCancel($appointment))->render();
+
+    return \Mail::to('carlosanselmi2@gmail.com')->send(new \App\Mail\AppointmentToPatientCancel($appointment));
+});
 
 Route::middleware([
     'auth:sanctum',

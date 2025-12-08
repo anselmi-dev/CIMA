@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 884.09 384.05">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_98);
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_70);
+      }
+
+      .cls-3 {
+        fill: url(#Degradado_sin_nombre_136);
+      }
+
+      .cls-4 {
+        fill: url(#Degradado_sin_nombre_69);
+      }
+
+      .cls-5 {
+        fill: url(#Degradado_sin_nombre_42);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_42" data-name="Degradado sin nombre 42" x1="0" y1="204.05" x2="688.46" y2="204.05" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#098683"/>
+      <stop offset="1" stop-color="#41b6b4"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_136" data-name="Degradado sin nombre 136" x1="117.36" y1="192.03" x2="884.09" y2="192.03" gradientUnits="userSpaceOnUse">
+      <stop offset=".06" stop-color="#3cb2af"/>
+      <stop offset=".32" stop-color="#269497"/>
+      <stop offset=".56" stop-color="#0e737d"/>
+      <stop offset=".9" stop-color="#0e737d"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_69" data-name="Degradado sin nombre 69" x1="396.47" y1="141.22" x2="879.37" y2="141.22" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b727e"/>
+      <stop offset="1" stop-color="#78be79"/>
+    </linearGradient>
+    <radialGradient id="Degradado_sin_nombre_70" data-name="Degradado sin nombre 70" cx="238.46" cy="45.05" fx="238.46" fy="45.05" r="32" gradientUnits="userSpaceOnUse">
+      <stop offset="1" stop-color="#41b4b2"/>
+      <stop offset="1" stop-color="#43a975"/>
+    </radialGradient>
+    <linearGradient id="Degradado_sin_nombre_98" data-name="Degradado sin nombre 98" x1="117.36" y1="366.05" x2="688.46" y2="366.05" gradientUnits="userSpaceOnUse">
+      <stop offset=".04" stop-color="#3cb2af"/>
+      <stop offset=".69" stop-color="#3eb3b0"/>
+    </linearGradient>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <polygon class="cls-5" points="107.46 24.05 107.46 55.78 38.46 55.78 38.46 316.47 239.17 115.76 382.46 259.05 472.96 168.55 688.46 384.05 634.46 384.05 473.46 223.05 383.46 313.05 239.46 169.05 24.48 384.03 0 384.03 0 24.05 107.46 24.05"/>
+      <polygon class="cls-3" points="117.36 384.05 501.41 0 884.09 382.68 829.46 382.68 501.2 54.42 207.51 348.1 598.63 348.1 634.52 383.99 117.36 384.05"/>
+      <polygon class="cls-4" points="432.32 123.3 843.52 123.3 879.37 159.14 396.47 159.14 432.32 123.3"/>
+      <circle class="cls-2" cx="238.46" cy="45.05" r="32"/>
+    </g>
+    <polygon class="cls-1" points="688.46 384.05 117.36 384.05 207.46 348.05 600 348.05 688.46 384.05"/>
+  </g>
+</svg>

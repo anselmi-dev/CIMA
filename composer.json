@@ -7,6 +7,11 @@
     "require": {
         "php": "^8.2",
         "diglactic/laravel-breadcrumbs": "^9.0",
+        "filament/filament": "^3.2",
+        "filament/spatie-laravel-media-library-plugin": "^3.2",
+        "flowframe/laravel-trend": "^0.3.0",
+        "husam-tariq/filament-timepicker": "^3.0",
+        "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/jetstream": "^5.1",
         "laravel/sanctum": "^4.0",
@@ -16,9 +21,11 @@
         "predis/predis": "^2.2",
         "rappasoft/laravel-livewire-tables": "^3.4",
         "rawilk/laravel-settings": "^3.3",
+        "saade/filament-fullcalendar": "^3.2",
         "spatie/laravel-activitylog": "^4.8",
+        "spatie/laravel-medialibrary": "^11.9",
         "spatie/laravel-permission": "^6.9",
-        "wireui/wireui": "^2.0"
+        "spatie/laravel-sluggable": "^3.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -40,10 +47,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -55,6 +64,14 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "app-optimize": [
+            "@php artisan optimize",
+            "@php artisan filament:optimize"
+        ],
+		"app-optimize-clear": [
+            "@php artisan optimize:clear",
+            "@php artisan filament:optimize-clear"
         ]
     },
     "extra": {

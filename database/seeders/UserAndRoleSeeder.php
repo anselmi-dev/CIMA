@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Professional;
 use App\Models\User;
+use Database\Factories\ProfessionalFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +20,6 @@ class UserAndRoleSeeder extends Seeder
      */
     public function run(): void
     {
-
         $role_develop = Role::firstOrCreate(['name' => 'develop']);
 
         $role_admin = Role::firstOrCreate(['name' => 'admin']);
@@ -26,11 +27,10 @@ class UserAndRoleSeeder extends Seeder
         $role_professional = Role::firstOrCreate(['name' => 'professional']);
 
         $user_develop = User::firstOrCreate([
-            'email' => 'develop@infinety.es',
+            'email' => 'anselmi.dev@gmail.com',
         ], [
-            'name' => 'develop',
-            'lastname' => 'CIMA',
-            'password' => Hash::make('password'),
+            'name' => 'Anselmi Dev',
+            'password' => Hash::make('19901020'),
             'email_verified_at' => now(),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
@@ -43,11 +43,10 @@ class UserAndRoleSeeder extends Seeder
 
 
         $user_admin = User::firstOrCreate([
-            'email' => 'admin@infinety.es',
+            'email' => 'macaperagallo@gmail.com',
         ], [
-            'name' => 'Administrador',
-            'lastname' => 'CIMA',
-            'password' => Hash::make('password'),
+            'name' => 'Macarena Peragallo',
+            'password' => Hash::make('admin1234'),
             'email_verified_at' => now(),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
@@ -58,12 +57,11 @@ class UserAndRoleSeeder extends Seeder
         if (!$user_admin->hasRole($role_admin->name))
             $user_admin->assignRole($role_admin->name);
 
-        $user_operator = User::firstOrCreate([
+        $user_professional = User::firstOrCreate([
             'email' => 'professional@infinety.es',
         ], [
             'name' => 'Operador',
-            'lastname' => 'CIMA',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('19901020'),
             'email_verified_at' => now(),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
@@ -71,7 +69,7 @@ class UserAndRoleSeeder extends Seeder
             'current_team_id' => null,
         ]);
 
-        if (!$user_operator->hasRole($role_professional->name))
-            $user_operator->assignRole($role_professional->name);
+        if (!$user_professional->hasRole($role_professional->name))
+            $user_professional->assignRole($role_professional->name);
     }
 }
