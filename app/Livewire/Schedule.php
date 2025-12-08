@@ -100,7 +100,7 @@ class Schedule extends Component
         // $end = $this->endDate instanceof Carbon ? $this->endDate : Carbon::parse($this->endDate);
 
         $daysOfWeek[$start->toDateString()] = $start->dayOfWeek;
-        
+
         // while ($start->lte($end)) {
 
         //     $daysOfWeek[$start->toDateString()] = $start->dayOfWeek;
@@ -135,7 +135,7 @@ class Schedule extends Component
                 ->where('day_of_week', array_values($daysOfWeek))
                 ->whereNotNull('time')
                 ->where('is_presence', $this->type == 'presencial')
-                ->whereRaw("JSON_LENGTH(time) > 0");
+                ->whereRaw("jsonb_array_length(time::jsonb) > 0");
         })
         ->get();
 
@@ -146,7 +146,7 @@ class Schedule extends Component
         ])
         ->layout('layouts.simple');
     }
-    
+
     public function initializeCalendar()
     {
         $this->currentMonth = $this->startDate->month;
@@ -212,7 +212,7 @@ class Schedule extends Component
 
         $this->initializeCalendar();
     }
-    
+
     public function selectDate ($date)
     {
         $this->startDate = Carbon::parse($date);
