@@ -6,31 +6,33 @@
         class="absolute inset-0 -z-10 size-full object-cover">
 
     <div class="mx-auto max-w-7xl px-6 lg:px-8 z-1 relative py-20 space-y-6 flex flex-col">
-        
+
         <div class="mx-auto max-w-2xl">
             <div class="text-center">
                 <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">
                     Agenda tu hora en Clínica CER
                     <x-layouts.parts.crossed-out>Clínica CER</x-layouts.parts.crossed-out>
                 </h1>
-                <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Somos especialistas en tratar
-                    la infertilidad.</p>
-                <form wire:submit.prevent="submit" class="mt-10 flex items-center justify-center gap-x-3">
+                <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+                    Somos especialistas en tratar la infertilidad.</p>
+                <form wire:submit.prevent="submit" class="mt-10 items-center gap-3 grid grid-cols-1 md:grid-cols-3">
                     <select wire:model="medicalSpecialtyId"
-                        class="col-start-1 row-start-1 max-w-full w-[200px] appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-A1-600 sm:text-sm/6">
-                        <option>Especialidad</option>
+                        class="w-full max-w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-A1-600 sm:text-sm/6">
+                        @if (!$medicalSpecialtyId)
+                            <option value="">Especialidad</option>
+                        @endif
                         @foreach ($medicalSpecialties as $medicalSpecialty)
                             <option value="{{ $medicalSpecialty->id }}">{{ $medicalSpecialty->name }}</option>
                         @endforeach
                     </select>
-                    
+
                     <select wire:model="type"
-                        class="col-start-1 row-start-1 max-w-full w-[200px] appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-A1-600 sm:text-sm/6">
+                        class="w-full max-w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-A1-600 sm:text-sm/6">
                         <option value="presencial">Presencial</option>
                         <option value="telemedicina">Telemedicina</option>
                     </select>
 
-                    <button type="submit" class="rounded-md bg-A1-500 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-A1-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-A1-600">
+                    <button type="submit" class="w-full rounded-md bg-A1-500 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-A1-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-A1-600">
                         <span>Buscar horarios</span>
                         <svg wire:loading wire:target="submit"
                             class="animate-spin mx-auto h-4 w-4 text-A1-600"
@@ -43,15 +45,15 @@
                         </svg>
                     </button>
                 </form>
-                {{-- <a href="#" class="text-sm/6 font-semibold text-white">Learn more <span aria-hidden="true">→</span></a> --}}
+
+                <x-errors :errors="$errors" class="mt-5 flex items-center justify-center gap-x-3 bg-white/10 p-4 rounded-md" />
             </div>
         </div>
 
         <div class="flex sm:justify-center mx-auto max-w-2xl">
             <div
                 class="relative rounded-full px-6 py-1 text-sm/6 text-gray-400 _ring-1 ring-white/10 hover:ring-white/20 text-center">
-                Si no encuentra una hora médica que se ajuste a sus necesidades, por favor escriba a <a href="#"
-                    class="font-semibold text-white">info@cer.cl</a> y le ayudaremos con su
+                Si no encuentra una hora médica que se ajuste a sus necesidades, por favor escriba a <x-contact-email /> y le ayudaremos con su
                 requerimiento.
             </div>
         </div>

@@ -31,22 +31,39 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicons/icons/favicon-144x144.png')}}">
         <meta name="msapplication-config" content="{{ asset('favicons/icons/browserconfig.xml')}}">
-
+        <!-- AOS Animation Library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <style>
             [x-cloak] {
                 display: none !important;
             }
         </style>
 
+        <script>
+            document.addEventListener('livewire:navigate', (event) => {
+                document.body.classList.remove('in');
+                document.body.classList.add('out');
+            })
+
+            document.addEventListener('livewire:navigated', () => {
+                document.body.classList.remove('out');
+                document.body.classList.add('in');
+                setTimeout(() => {
+                    document.body.classList.remove('in');
+                }, 1000);
+            })
+        </script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
+
         @filamentStyles
 
+        @stack('styles')
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="bg-[#F9FAF5] h-full">
+    <body class="bg-[#F9FAF5] h-full | fade-in">
 
         <div class="flex flex-col w-full min-h-full">
 
@@ -57,11 +74,11 @@
                 <x-layouts.parts.header/>
             @endif
             <!-- Header -->
-            
-            <main class="flex-1 w-full">
+
+            <main id="app-content" class="flex-1 w-full">
                 {{ $slot }}
             </main>
-            
+
             <!-- Footer -->
             @if (isset($footer))
                 {!! $footer !!}
@@ -73,8 +90,20 @@
         @stack('modals')
 
         @livewireScripts
-        
+
         @filamentScripts
-        @vite('resources/js/app.js')
+
+        @stack('scripts')
+        <!-- AOS Animation Library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: false, // Permite que la animación se repita
+                mirror: true, // Activa la animación al hacer scroll hacia arriba también
+                offset: 100, // Offset en px desde el borde del viewport
+            });
+        </script>
     </body>
 </html>

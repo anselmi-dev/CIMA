@@ -11,6 +11,7 @@ use App\Livewire\{
     TermsAndConditions,
     PrivacyPolicy,
     CookiesPolicy,
+    Testimonials,
     Professional,
     Professionals,
     Schedule,
@@ -44,6 +45,8 @@ Route::get('agendar/cita/{appointment:uuid}/cancelada', ScheduleCanceled::class)
 
 Route::get('profesionales', Professionals::class)->name('professionals');
 
+Route::get('testimonios', Testimonials::class)->name('testimonials');
+
 Route::get('profesional/{professional:slug}', Professional::class)->name('professional');
 
 Route::get('test', function () {
@@ -57,7 +60,7 @@ Route::get('test', function () {
     // ]);
     $appointment->save();
 
-    
+
     return (new \App\Mail\AppointmentToPatientCreated($appointment))->render();
 
     return \Mail::to('carlosanselmi2@gmail.com')->send(new \App\Mail\AppointmentToPatientCreated($appointment));

@@ -13,6 +13,7 @@ return [
         'bio' => 'Biografía',
         'created_at' => 'Fecha de Creación',
         'rut' => 'RUT',
+        'consultation_fee' => 'Precio consulta',
     ],
     'navigation_label' => 'Profesionales',
     'label' => 'Profesional',

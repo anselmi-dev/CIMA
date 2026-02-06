@@ -29,10 +29,11 @@
                     </p>
                     <div class="mt-10 flex items-center gap-x-6 text-center mx-auto justify-center">
                         <a href="{{ route('schedule.index') }}"
+                            wire:navigate
                             class="rounded-md bg-A1-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-A1-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-A1-600">
                             {{ __('Agendar cita') }}
                         </a>
-                        <a href="{{ route('contact') }}" class="text-sm font-semibold leading-6 text-white">
+                        <a href="{{ route('contact') }}" wire:navigate class="text-sm font-semibold leading-6 text-white">
                             {{ __('Contáctanos') }}
                             <span aria-hidden="true">→</span>
                         </a>
@@ -45,7 +46,7 @@
     <div class="max-w-7xl mx-auto flex flex-col space-y-32 px-6 lg:px-8">
         <div class="py-24 sm:py-32">
             <div class="mx-auto max-w-7xl">
-                <div class="mx-auto max-w-5xl lg:mx-0">
+                <div data-aos="fade-up"  class="mx-auto max-w-5xl lg:mx-0">
                     <h2 class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
                         En <x-layouts.parts.crossed-out>Clinica Cer</x-layouts.parts.crossed-out> somos especialista en
                         tratar los problemas de fertilidad.
@@ -60,7 +61,7 @@
                 </div>
                 <div
                     class="mx-auto mt-16 flex max-w-2xl flex-col gap-8 lg:mx-0 lg:mt-20 lg:max-w-none lg:flex-row lg:items-end">
-                    <div
+                    <div data-aos="fade-up"
                         class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A1-500 p-8 sm:w-3/4 sm:max-w-md sm:flex-row-reverse sm:items-end lg:w-72 lg:max-w-none lg:flex-none lg:flex-col lg:items-start">
                         <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
                         <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
@@ -71,7 +72,7 @@
                             </p>
                         </div>
                     </div>
-                    <div
+                    <div data-aos="fade-up"
                         class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A2-500 p-8 sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-sm lg:flex-auto lg:flex-col lg:items-start lg:gap-y-30">
                         <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
                         <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
@@ -82,7 +83,7 @@
                                 parejas).</p>
                         </div>
                     </div>
-                    <div
+                    <div data-aos="fade-up"
                         class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A3-500 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28">
                         <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
                         <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
@@ -92,7 +93,7 @@
                                 egestas. Eu duis porta aliquam ornare.</p>
                         </div>
                     </div>
-                    <div
+                    <div data-aos="fade-up"
                         class="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-A4-500 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-20">
                         <p class="flex-none text-3xl font-bold tracking-tight text-gray-900"></p>
                         <div class="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
@@ -106,7 +107,7 @@
             </div>
         </div>
 
-        <div class="relative bg-gray-900 rounded-2xl">
+        <div data-aos="fade-up" class="relative bg-gray-900 rounded-2xl">
             <div
                 class="relative h-80 overflow-hidden bg-A1-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2 rounded-l-2xl">
                 <img class="size-full object-cover" src="{{ asset('images/home/card-3.jpg') }}" alt="">
@@ -135,30 +136,34 @@
             </div>
         </div>
 
-        <section>
-            <div class="mx-auto max-w-7xl">
-                <div
-                    class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
-                    <img class="absolute inset-0 size-full object-cover brightness-150 saturate-0"
-                        src="https://cer.cl/wp-content/uploads/2022/01/manos-cer-cl.jpg" alt="">
-                    <x-layouts.parts.blend-multiply />
-                    <div class="relative mx-auto max-w-2xl lg:mx-0">
-                        <figure>
-                            <blockquote class="mt-6 text-lg font-semibold text-white sm:text-xl/8">
-                                <p>
-                                    ESTAMOS CONTIGO EN CADA ETAPA DEL PROCESO
-                                </p>
-                            </blockquote>
-                            <figcaption class="mt-6 text-base text-white">
-                                <div class="font-semibold">Ver Testimonios→</div>
-                            </figcaption>
-                        </figure>
+        @if(hasTestimonials())
+            <section data-aos="fade-up">
+                <div class="mx-auto max-w-7xl">
+                    <div
+                        class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
+                        <img class="absolute inset-0 size-full object-cover brightness-150 saturate-0"
+                            src="https://cer.cl/wp-content/uploads/2022/01/manos-cer-cl.jpg" alt="">
+                        <x-layouts.parts.blend-multiply />
+                        <div class="relative mx-auto max-w-2xl lg:mx-0">
+                            <figure>
+                                <blockquote class="mt-6 text-lg font-semibold text-white sm:text-xl/8">
+                                    <p>
+                                        ESTAMOS CONTIGO EN CADA ETAPA DEL PROCESO
+                                    </p>
+                                </blockquote>
+                                <figcaption class="mt-6 text-base text-white">
+                                    <div class="font-semibold">
+                                        <a href="{{ route('testimonials') }}" class="text-white">Ver Testimonios→</a>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
-        <section>
+        <section data-aos="fade-up">
             <div class="mx-auto max-w-7xl">
                 <div
                     class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
@@ -181,7 +186,7 @@
             </div>
         </section>
 
-        <section>
+        <section data-aos="fade-up">
             <div class="mx-auto max-w-7xl">
                 <div
                     class="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
@@ -204,14 +209,16 @@
             </div>
         </section>
 
-        <section>
+        <section data-aos="fade-up">
             <div class="px-6 sm:px-6 sm:pb-32 lg:px-8">
                 <div class="mx-auto max-w-2xl text-center">
                     <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
                         ¿Tienes dudas?</h2>
                     <p class="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-600">Revisa nuestras preguntas
                         frecuentes y glosario de términos o simplemente escríbenos a
-                        <x-layouts.parts.crossed-out>info@cer.cl</x-layouts.parts.crossed-out></p>
+                        <x-layouts.parts.crossed-out>
+                            {{ settings('email', 'info@cer.cl') }}
+                        </x-layouts.parts.crossed-out></p>
                 </div>
             </div>
         </section>

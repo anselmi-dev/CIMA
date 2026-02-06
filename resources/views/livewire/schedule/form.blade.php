@@ -56,18 +56,23 @@
                                     <div class="divide-y divide-gray-200 px-4 sm:px-6">
                                         <div class="space-y-6 pb-5 pt-6">
                                             <div class="relative flex gap-x-6 xl:static">
-                                                <img src="{{ $current->professional->user->profile_photo_url }}" alt=""
-                                                    class="size-14 flex-none rounded-full">
+                                                <img src="{{ $current->professional->user->profile_photo_url }}" alt="{{ $current->professional->full_name }}"
+                                                    class="size-14 flex-none rounded-full bg-white">
 
                                                 <div class="flex-auto">
-                                                    <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">
+                                                    <h3 class="pr-10 font-semibold text-lg text-gray-900 xl:pr-0">
                                                         {{ $current->professional->full_name }}
                                                     </h3>
-                                                    <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
-                                                        <div class="flex items-start gap-x-3">
+                                                    <dl class="text-base flex flex-col text-gray-500 xl:flex-row">
+                                                        <div class="flex items-start gap-x-3 flex-col">
                                                             <dd>
                                                                 <span>{{ $current->professional->medicalSpecialties->first()->name }}</span>
                                                             </dd>
+                                                            @if ($current->professional->consultation_fee !== null)
+                                                                <dd class="font-semibold text-gray-900">
+                                                                    {{ \Illuminate\Support\Number::currency($current->professional->consultation_fee, 'CLP') }}
+                                                                </dd>
+                                                            @endif
                                                         </div>
                                                     </dl>
                                                 </div>
@@ -232,7 +237,7 @@
                                                             </div>
                                                           </div>
                                                         </div>
-                                                    </div>                                                      
+                                                    </div>
                                                 @endif
                                             </div>
                                         </div>

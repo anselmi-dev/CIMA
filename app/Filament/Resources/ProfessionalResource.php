@@ -98,6 +98,14 @@ class ProfessionalResource extends Resource
                     ->required()
                     ->maxLength(15),
 
+                Forms\Components\TextInput::make('consultation_fee')
+                    ->label(__('resources/professional.labels.consultation_fee'))
+                    ->numeric()
+                    ->minValue(0)
+                    ->step(0.01)
+                    ->prefix('$')
+                    ->nullable(),
+
                 Forms\Components\Select::make('medical_specialties')
                     ->label(__('resources/medical_speciality.navigation_label'))
                     ->multiple()
@@ -137,6 +145,10 @@ class ProfessionalResource extends Resource
                 Tables\Columns\TextColumn::make('medicalSpecialties.name')
                     ->label(__('resources/medical_speciality.navigation_label')),
                 Tables\Columns\TextColumn::make('phone')->label(__('resources/professional.labels.phone'))->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('consultation_fee')
+                    ->label(__('resources/professional.labels.consultation_fee'))
+                    ->money()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('resources/professional.labels.created_at'))->dateTime()->sortable(),
             ])
 			->filters([

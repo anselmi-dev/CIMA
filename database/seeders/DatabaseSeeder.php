@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
             AdminBankAccountSeeder::class,
             AppointmentSeeder::class,
             PatientSeeder::class,
-            UserAndRoleSeeder::class
+            UserAndRoleSeeder::class,
+            SettingSeeder::class,
+            FaqSeeder::class,
+            PageSeeder::class,
+            TestimonialSeeder::class,
         ]);
     }
 }
+
+

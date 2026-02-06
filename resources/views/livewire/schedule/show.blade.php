@@ -84,14 +84,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
 
-                        <svg wire:loading wire:target="prevMonth" class="animate-spin mx-auto h-5 w-5 text-A1-600"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                            </path>
-                        </svg>
+                        <x-loading-spinner wire:loading wire:target="prevMonth" class="mx-auto h-5 w-5 text-A1-600" />
 
                     </button>
                     <div class="flex-auto text-sm font-semibold capitalize">
@@ -107,14 +100,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
 
-                        <svg wire:loading wire:target="nextMonth" class="animate-spin mx-auto h-5 w-5 text-A1-600"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                            </path>
-                        </svg>
+                        <x-loading-spinner wire:loading wire:target="nextMonth" class="mx-auto h-5 w-5 text-A1-600" />
 
                     </button>
                 </div>
@@ -136,10 +122,13 @@
                             $selected = $day['date']->toDateString() == ($startDate ? $startDate->toDateString() : '');
                             $disabled = !$day['date']->gt(now()->subDays(1));
                         @endphp
+
                         <button
                             type="button"
                             @if (!$disabled)
                                 wire:click="selectDate('{{ $day['date']->toDateString() }}')"
+                                wire:loading.class="opacity-50 cursor-not-allowed"
+                                wire:loading.attr="disabled"
                             @endif
                             @class([
                                 'py-1.5 focus:z-10 relative',
@@ -163,15 +152,8 @@
                                 {{ $day['date']->day }}
                             </time>
 
-                            <svg wire:loading wire:target="selectDate('{{ $day['date']->toDateString() }}')"
-                                class="animate-spin mx-auto h-5 w-5 text-A1-600" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                    stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                                </path>
-                            </svg>
+                            <x-loading-spinner wire:loading wire:target="selectDate('{{ $day['date']->toDateString() }}')"
+                                class="mx-auto h-5 w-5 text-A1-600" />
 
                         </button>
                     @endforeach
@@ -188,21 +170,26 @@
         </div>
 
         <ol class="mt-4 divide-y divide-gray-100 text-sm/6 lg:col-span-7 xl:col-span-8">
-            @forelse ($professionals as $professional)
+            @forelse ($this->professionals as $professional)
                 <li class="mb-4">
                     <div class="relative flex gap-x-6 py-6 xl:static">
-                        <img src="{{ $professional->user->profile_photo_url }}" alt=""
-                            class="size-14 flex-none rounded-full">
+                        <img src="{{ $professional->user->profile_photo_url }}" alt="{{ $professional->full_name }}"
+                            class="size-14 lg:size-20 flex-none rounded-full bg-white">
 
                         <div class="flex-auto">
-                            <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">
+                            <h3 class="pr-10 font-semibold text-lg text-gray-900 xl:pr-0">
                                 {{ $professional->full_name }}
                             </h3>
-                            <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
-                                <div class="flex items-start gap-x-3">
+                            <dl class="text-base flex flex-col text-gray-500 xl:flex-row">
+                                <div class="flex items-start gap-x-3 flex-col">
                                     <dd>
                                         <span>{{ $professional->medicalSpecialties->first()->name }}</span>
                                     </dd>
+                                    @if ($professional->consultation_fee !== null)
+                                        <dd class="font-semibold text-gray-900">
+                                            {{ \Illuminate\Support\Number::currency($professional->consultation_fee, 'CLP') }}
+                                        </dd>
+                                    @endif
                                 </div>
                             </dl>
                         </div>
@@ -213,18 +200,18 @@
                                 @foreach ($schedule->time as $time)
                                     @php
                                         $datetime = \Carbon\Carbon::createFromFormat('H', $time);
-
                                         $dateStartDate = $this->startDate->copy()->setTimeFromTimeString($time);
-
-                                        $isAvailable = !$appointments->search(trim($professional->id . '|' . $dateStartDate->format('Y-m-d H'))) !== false && $dateStartDate->gt(now()->addHours(3));
-
+                                        $slotKey = trim($professional->id . '|' . $dateStartDate->format('Y-m-d H'));
+                                        // Solo habilitar si el slot no está tomado por una cita activa (pending/confirmed). Las canceladas no bloquean.
+                                        $slotTakenByActiveAppointment = $this->appointments->contains($slotKey);
+                                        $isAvailable = !$slotTakenByActiveAppointment && $dateStartDate->gt(now()->addHours(3));
                                     @endphp
 
                                     <button x-data="{ loading: false }" type="button"
                                         @if ($isAvailable)
-                                            @click="loading = true; $wire.selectTime({{ $schedule->id }}, '{{ $datetime->toDateTimeString() }}'); setTimeout(() => loading = false, 1000)"
+                                            @click="loading = true; $wire.selectTime({{ $schedule->id }}, '{{ $dateStartDate->toDateTimeString() }}'); setTimeout(() => loading = false, 1000)"
                                         @else
-                                            disabled 
+                                            disabled
                                         @endif
                                         @class([
                                             "rounded-md py-1 px-2 relative",
@@ -242,15 +229,9 @@
                                         <span :class="{ 'opacity-0': loading }">
                                             {{ $datetime->format('H:i') }}
                                         </span>
-                                        <svg x-show="loading"
-                                            class="animate-spin mx-auto h-5 w-5 text-gray-800 absolute top-0 left-0 right-0 bottom-0 m-auto"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                                            </path>
-                                        </svg>
+                                        <span x-show="loading" class="mx-auto absolute top-0 left-0 right-0 bottom-0 m-auto flex items-center justify-center">
+                                            <x-loading-spinner class="h-5 w-5 text-gray-800" />
+                                        </span>
                                     </button>
                                 @endforeach
                             @endforeach
@@ -259,7 +240,7 @@
                 </li>
             @empty
                 <li>
-                    <main class="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                    <main class="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
                         <div class="text-center">
                             <h1
                                 class="mt-2 text-balance text-1xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
@@ -269,10 +250,14 @@
                                 No se encontraron horarios para la especialidad seleccionada.
                             </p>
                             <div class="mt-3 flex items-center justify-center gap-x-6">
-                                <a href="#"
+                                <button wire:click="nextScheduleAvailable"
+                                    wire:loading.class="opacity-50 cursor-not-allowed"
+                                    wire:loading.attr="disabled"
                                     class="rounded-md bg-A1-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-A1-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-A1-600">
-                                    Ver horarios disponibles próximos
-                                </a>
+
+                                    <x-loading-spinner wire:loading wire:target="nextScheduleAvailable" />
+                                    <span>Ver horarios disponibles próximos</span>
+                                </button>
                             </div>
                         </div>
                     </main>

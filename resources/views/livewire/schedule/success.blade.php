@@ -12,7 +12,7 @@
             <p class="mt-2 text-base text-gray-500">
                 Si no encuentras el correo en tu bandeja de entrada, revisa la carpeta de spam o contáctanos para recibir asistencia.
             </p>
-            {{-- 
+            {{--
             <dl class="mt-12 text-sm font-medium">
                 <dt class="text-gray-900">Tracking number</dt>
                 <dd class="mt-2 text-indigo-600">51547878755545848512</dd>
@@ -21,12 +21,12 @@
         </div>
 
         <section aria-labelledby="order-heading" class="w-full mt-10 border-t border-gray-200">
-            <div class="justify-center flex space-x-6 border-b border-gray-200 py-10">
-                <section aria-labelledby="recent-heading">
+            <div class="justify-center flex space-x-6 border-b border-gray-200 py-10 w-full">
+                <section aria-labelledby="recent-heading" class="w-full">
                     <h2 id="recent-heading" class="sr-only">Recent orders</h2>
                     <div class="mx-auto sm:px-2 lg:px-8">
-                        <div class="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
-                            <div class="border-t border-b border-gray-200 bg-white shadow-xs sm:rounded-lg sm:border">
+                        <div class="mx-auto w-full space-y-8 sm:px-4 lg:px-0 max-w-4xl">
+                            <div class="border-t border-b border-gray-200 bg-white shadow-xs sm:rounded-lg sm:border w-full">
                                 <h3 class="sr-only">Order placed on <time datetime="2021-07-06">Jul 6, 2021</time></h3>
                                 <!-- Products -->
                                 <h4 class="sr-only">Items</h4>
@@ -84,18 +84,24 @@
                                                 </div>
                                             </div>
                                         </div>
-            
-                                        <div class="mt-6 sm:flex sm:justify-end">
+
+                                        <div class="mt-6 flex flex-col gap-3 justify-end">
                                             <div
-                                                class="mt-6 flex items-center divide-x divide-gray-200 border-t border-gray-200 pt-4 text-sm font-medium sm:mt-0 sm:ml-4 sm:border-none sm:pt-0">
-                                                <div class="flex flex-1 justify-center pl-4">
-                                                    <button 
+                                                class="flex flex-col gap-3 items-end justify-end border-t border-gray-200 pt-4 text-sm font-medium sm:mt-0 sm:ml-4 sm:border-none sm:pt-0 flex-wrap">
+                                                <div class="flex flex-1 gap-3 justify-end">
+                                                    <!-- boton de cancelacion automatico -->
+                                                    <button
                                                         type="button"
                                                         x-on:click="openCancel = true"
-                                                        class="whitespace-nowrap text-gray-600 hover:text-gray-500 rounded border-gray-600 border px-2 py-1">
-                                                        Cancelar agenda
+                                                        class="whitespace-nowrap bg-gray-500 text-white hover:bg-gray-600 text-md rounded border-gray-600 border px-2 py-2">
+                                                        Cancelar reserva
                                                     </button>
                                                 </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <p class="text-sm text-gray-500">
+                                                    Solo tienes {{ $appointment->start_at->diffInHours(now()) }} horas para confirmar tu reserva. Si cancelas la reserva, no podrás recuperarla.
+                                                </p>
                                             </div>
                                         </div>
                                     </li>
@@ -113,6 +119,7 @@
         </section>
 
         <div
+            x-cloak
             x-show="openCancel"
             class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
             x-show="openCancel"
@@ -124,7 +131,7 @@
             x-transition:leave-end="opacity-0"
             >
             <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
-          
+
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
               <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
@@ -148,7 +155,7 @@
                       </h3>
                       <div class="mt-2">
                         <p class="text-sm text-gray-500">
-                            ¿Estás seguro de cancelar la reserva de tu cita? 
+                            ¿Estás seguro de cancelar la reserva de tu cita?
                         </p>
                       </div>
                     </div>
@@ -158,7 +165,8 @@
                         type="button"
                         wire:loading.attr="disabled"
                         wire:click="cancel" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
-                        Cancelar reserva
+                        <x-loading-spinner class="size-4 text-white" wire:loading wire:target="cancel" />
+                        <span>Cancelar reserva</span>
                     </button>
                     <button type="button"
                         wire:loading.attr="disabled"
@@ -170,7 +178,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          
+        </div>
     </div>
 </div>

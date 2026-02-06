@@ -74,9 +74,12 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
 
     public function getProfilePhotoUrlAttribute(): ?string
     {
-        return url('storage/'.$this->profile_photo_path);
+        if ($this->profile_photo_path)
+            return url('storage/' . $this->profile_photo_path);
+
+        return asset('images/professional-default.png');
     }
- 
+
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url;

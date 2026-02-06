@@ -9,6 +9,7 @@ use App\Models\Professional;
 use App\Notifications\AppointmentCreated;
 use App\Models\ProfessionalSchedule;
 use Carbon\Carbon;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Schedule extends Component
@@ -91,58 +92,52 @@ class Schedule extends Component
         $this->initializeCalendar();
     }
 
-    public function render ()
+    #[Computed]
+    public function professionals()
     {
-        $daysOfWeek = [];
-
         $start = $this->startDate instanceof Carbon ? $this->startDate : Carbon::parse($this->startDate);
+        $daysOfWeek = [$start->toDateString() => $start->dayOfWeek];
 
-        // $end = $this->endDate instanceof Carbon ? $this->endDate : Carbon::parse($this->endDate);
+        return Professional::whereHas('medicalSpecialties', function ($query) {
+                $query->where('medical_specialty_id', $this->medicalSpecialty->id);
+            })
+            ->with(['schedules' => function ($query) use ($daysOfWeek) {
+                $query->whereIn('day_of_week', array_values($daysOfWeek))
+                    ->where('is_presence', $this->type == 'presencial');
+            }])
+            ->whereHas('schedules', function ($query) use ($daysOfWeek) {
+                $query
+                    ->where('day_of_week', array_values($daysOfWeek))
+                    ->whereNotNull('time')
+                    ->where('is_presence', $this->type == 'presencial')
+                    ->whereRaw(config('database.default') == 'pgsql' ? "jsonb_array_length(time::jsonb) > 0" : "JSON_LENGTH(time) > 0");
+            })
+            ->get();
+    }
 
-        $daysOfWeek[$start->toDateString()] = $start->dayOfWeek;
-
-        // while ($start->lte($end)) {
-
-        //     $daysOfWeek[$start->toDateString()] = $start->dayOfWeek;
-
-        //     $start->addDay();
-        // }
-
+    /**
+     * Claves de slots ocupados (professional_id|Y-m-d H).
+     * Solo se incluyen citas con reserva activa (pending/confirmed).
+     * Las canceladas no bloquean el slot.
+     */
+    #[Computed]
+    public function appointments()
+    {
         $date = Carbon::create($this->currentYear, $this->currentMonth, 1);
 
-        $this->startOfMonth = $date->copy()->startOfMonth();
+        return Appointment::query()
+            ->where('start_at', '>=', $date->copy()->startOfMonth())
+            ->where('start_at', '<=', $date->copy()->endOfMonth())
+            ->whereIn('status', ['pending', 'confirmed'])
+            ->get(['start_at', 'professional_id'])
+            ->map(function ($appointment) {
+                return trim($appointment->professional_id . '|' . $appointment->start_at->format('Y-m-d H'));
+            });
+    }
 
-        $this->endOfMonth = $date->copy()->endOfMonth();
-
-        $appointments = Appointment::query()
-                                ->where('start_at', '>=', $date->copy()->startOfMonth())
-                                ->where('start_at', '<=', $date->copy()->endOfMonth())
-                                ->where('status', '!=', 'cancelled')
-                                ->get(['start_at', 'professional_id'])
-                                ->map(function ($appointment) {
-                                    return trim($appointment->professional_id . '|' . $appointment->start_at->format('Y-m-d H'));
-                                });
-
-        $professionals = Professional::whereHas('medicalSpecialties', function ($query) {
-            $query->where('medical_specialty_id', $this->medicalSpecialty->id);
-        })
-        ->with(['schedules' => function ($query) use ($daysOfWeek) {
-            $query->whereIn('day_of_week', array_values($daysOfWeek))
-                ->where('is_presence', $this->type == 'presencial');
-        }])
-        ->whereHas('schedules', function ($query) use ($daysOfWeek) {
-            $query
-                ->where('day_of_week', array_values($daysOfWeek))
-                ->whereNotNull('time')
-                ->where('is_presence', $this->type == 'presencial')
-                ->whereRaw("jsonb_array_length(time::jsonb) > 0");
-        })
-        ->get();
-
+    public function render ()
+    {
         return view('livewire.schedule.show', [
-            'medicalSpecialty' => $this->medicalSpecialty,
-            'professionals' =>  $professionals,
-            'appointments' => $appointments
         ])
         ->layout('layouts.simple');
     }
@@ -199,6 +194,65 @@ class Schedule extends Component
         }
     }
 
+    /**
+     * Busca el próximo día con al menos un horario libre y mueve el calendario a ese mes/año.
+     * A partir de la fecha seleccionada; si es hoy, solo se consideran slots con al menos 3 horas de antelación.
+     *
+     * @return void
+     */
+    public function nextScheduleAvailable()
+    {
+        $start = ($this->startDate instanceof Carbon ? $this->startDate : Carbon::parse($this->startDate))->copy()->startOfDay();
+        $end = $start->copy()->addDays(90);
+
+        $appointmentsInRange = Appointment::query()
+            ->where('start_at', '>=', $start)
+            ->where('start_at', '<=', $end)
+            ->where('status', '!=', 'cancelled')
+            ->get(['start_at', 'professional_id'])
+            ->map(fn ($a) => trim($a->professional_id . '|' . $a->start_at->format('Y-m-d H')));
+        $appointmentKeysSet = $appointmentsInRange->flip()->all();
+
+        $schedules = ProfessionalSchedule::query()
+            ->where('is_presence', $this->type == 'presencial')
+            ->whereHas('professional.medicalSpecialties', fn ($q) => $q->where('medical_specialty_id', $this->medicalSpecialty->id))
+            ->whereNotNull('time')
+            ->whereRaw(config('database.default') === 'pgsql' ? 'jsonb_array_length(time::jsonb) > 0' : 'JSON_LENGTH(time) > 0')
+            ->get(['id', 'professional_id', 'day_of_week', 'time']);
+
+        $minHoursFromNow = now()->addHours(3);
+
+        for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
+            $dayOfWeek = $date->dayOfWeek;
+            $daySchedules = $schedules->filter(fn ($s) => (int) $s->day_of_week === $dayOfWeek);
+
+            foreach ($daySchedules as $schedule) {
+                $times = $schedule->time;
+                if (! is_array($times)) {
+                    continue;
+                }
+                foreach ($times as $timeStr) {
+                    $slotDt = strlen((string) $timeStr) <= 2
+                        ? Carbon::parse($date->toDateString())->setHour((int) $timeStr)->minute(0)->second(0)
+                        : Carbon::parse($date->toDateString() . ' ' . $timeStr);
+                    if ($date->isToday() && $slotDt->lt($minHoursFromNow)) {
+                        continue;
+                    }
+                    $key = $schedule->professional_id . '|' . $slotDt->format('Y-m-d H');
+                    if (! isset($appointmentKeysSet[$key])) {
+                        $this->startDate = $date->copy();
+                        $this->initializeCalendar();
+                        return;
+                    }
+                }
+            }
+        }
+
+        $this->startDate = $start->copy();
+
+        $this->initializeCalendar();
+    }
+
     public function nextMonth()
     {
         $this->startDate = $this->startDate->addMonth();
@@ -233,13 +287,11 @@ class Schedule extends Component
     {
         $this->validate();
 
-        $patient = Patient::updateOrCreate([
-            'professional_id' => $this->current->professional->id,
+        $patient = $this->current->professional->patients()->create([
             'rut' => strtoupper(trim($this->reservation['dni'])),
-        ], [
             'name' => $this->reservation['name'],
             'lastname' => $this->reservation['last_name'],
-            'birthday' => $this->reservation['birthdate_year'] . '-' . $this->reservation['birthdate_month'] . '-' . $this->reservation['birthdate_day'],
+            'birthday' => Carbon::create($this->reservation['birthdate_year'], $this->reservation['birthdate_month'], $this->reservation['birthdate_day']),
             'email' => $this->reservation['email'],
             'phone' => $this->reservation['phone'],
         ]);
@@ -257,8 +309,8 @@ class Schedule extends Component
             ]
         ]);
 
-        return redirect()->route('schedule.success', [
+        return $this->redirectRoute('schedule.confirm', [
             'appointment' => $appointment->uuid
-        ]);
+        ], navigate: true);
     }
 }

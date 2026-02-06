@@ -18,10 +18,10 @@
                             </div>
 
                             <div class="mt-2 flex items-center justify-end gap-2">
-                                <x-filament::button href="{{ route('home') }}" xs primary>
+                                <x-filament::button href="{{ route('home') }}" wire:navigate xs primary>
                                     {{ __('Agendar cita') }}
                                 </x-filament::button>
-                                <x-filament::button href="{{ $professional->url_profile }}" xs primary outline>
+                                <x-filament::button href="{{ $professional->url_profile }}" wire:navigate xs primary outline>
                                     <span>{{ __('Ver perfil') }}</span>
                                 </x-filament::button>
                             </div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         @empty
-            
+
         @endforelse
     </div>
 </x-container.page>

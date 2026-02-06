@@ -49,36 +49,46 @@ class AdminBankAccountResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('bank')
+                Forms\Components\Select::make('bank_id')
                     ->label(__('resources/admin_bank_account.labels.bank_name'))
                     ->relationship('bank', 'name')
-                    ->options(Bank::all()->pluck('name', 'id'))
                     ->required()
+                    ->searchable()
+                    ->preload()
                     ->columnSpanFull(),
 
                 Forms\Components\TextInput::make('bank_details.full_name')
                     ->label(__('resources/admin_bank_account.labels.full_name'))
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('bank_details.rut')
+                    ->label(__('resources/admin_bank_account.labels.rut'))
+                    ->required()
+                    ->maxLength(20),
                 Forms\Components\TextInput::make('bank_details.email')
                     ->label(__('resources/admin_bank_account.labels.email'))
-                    ->required(),
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('bank_details.account_number')
                     ->label(__('resources/admin_bank_account.labels.account_number'))
-                    ->required(),
+                    ->required()
+                    ->maxLength(50),
                 Forms\Components\Select::make('bank_details.account_type')
                     ->label(__('resources/admin_bank_account.labels.account_type'))
                     ->options([
                         'ahorro' => 'Cuenta de Ahorro',
                         'corriente' => 'Cuenta Corriente',
                     ])
-                    ->required(),
+                    ->default('corriente'),
                 Forms\Components\Textarea::make('notes')
                     ->label(__('resources/admin_bank_account.labels.notes'))
                     ->columnSpanFull()
-                    ->nullable(),
+                    ->nullable()
+                    ->rows(3),
                 Forms\Components\Toggle::make('status')
                     ->label(__('resources/admin_bank_account.labels.status'))
-                    ->required(),
+                    ->default(true),
             ]);
     }
 
@@ -88,22 +98,24 @@ class AdminBankAccountResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label(__('resources/admin_bank_account.labels.id'))
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('bank.name')
                     ->label(__('resources/admin_bank_account.labels.bank_name'))
                     ->sortable()
                     ->searchable(),
-
-                Tables\Columns\TextColumn::make('bank_details')
-                    ->label(__('resources/admin_bank_account.labels.bank_details'))
-                    ->sortable()
+                Tables\Columns\TextColumn::make('bank_details.full_name')
+                    ->label(__('resources/admin_bank_account.labels.full_name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('bank_details.account_number')
+                    ->label(__('resources/admin_bank_account.labels.account_number'))
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('status')
                     ->label(__('resources/admin_bank_account.labels.status'))
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->label(__('resources/admin_bank_account.labels.created_at'))->dateTime()->sortable(),
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('resources/admin_bank_account.labels.created_at'))
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 // Define any filters here

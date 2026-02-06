@@ -54,10 +54,13 @@ class AdminPanelProvider extends PanelProvider
                 Resources\TransactionResource::class,
                 // Resources\ProfessionalScheduleResource::class,
                 Resources\ProfessionalBankAccountResource::class,
+                Resources\FaqResource::class,
+                Resources\PageResource::class,
             ])
             ->plugins([
                 FilamentFullCalendarPlugin::make()
             ])
+            ->plugin(\RickDBCN\FilamentEmail\FilamentEmail::make())
             // ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

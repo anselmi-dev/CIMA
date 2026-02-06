@@ -29,11 +29,11 @@ class ScheduleSuccess extends Component
     public function cancel()
     {
         $this->appointment->status = 'cancelled';
-        
+
         $this->appointment->save();
 
-        return redirect()->route('schedule.canceled', [
+        return $this->redirectRoute('schedule.canceled', [
             'appointment' => $this->appointment->uuid
-        ]);
+        ], navigate: true);
     }
 }

@@ -2,12 +2,27 @@
 
 namespace App\Livewire;
 
+use App\Models\Faq;
 use Livewire\Component;
+use App\Models\Page;
 
 class FAQs extends Component
 {
+    public Page $page;
+
+    public function mount()
+    {
+        $this->page = Page::where('slug', 'faqs')->where('active', true)->first();
+
+        if (!$this->page) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
-        return view('livewire.f-a-qs');
+        return view('livewire.faqs', [
+            'faqs' => Faq::ordered()->get(),
+        ]);
     }
 }

@@ -17,7 +17,7 @@ class AdminBankAccount extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'bank_details', // ['name' => 'string', 'account_number' => 'string', 'rut' => 'string']
+        'bank_details',
         'bank_id',
         'status',
         'notes',

@@ -11,7 +11,7 @@ class SpecialitySchedule extends Component
 
     public $medicalSpecialtyId;
 
-    public $type;
+    public $type = 'presencial';
 
     /**
      * @var array
@@ -25,15 +25,18 @@ class SpecialitySchedule extends Component
      * @var array
      */
     public $messages = [
-        'medicalSpecialtyId.required' => 'La especialidad es obligatoria',
-        'type.required' => 'El tipo es obligatorio',
+        'medicalSpecialtyId.required' => 'La especialidad médica es obligatoria',
+        'type.required' => 'El tipo de consulta es obligatorio',
     ];
-
 
     public function render ()
     {
+        $medicalSpecialtys = MedicalSpecialty::orderBy('name')->get();
+
+        $this->medicalSpecialtyId = $medicalSpecialtys->first()?->id;
+
         return view('livewire.schedule.speciality-schedule', [
-            'medicalSpecialties' => MedicalSpecialty::orderBy('name')->get()
+            'medicalSpecialties' => $medicalSpecialtys
         ])->layout('layouts.simple');
     }
 
@@ -42,10 +45,10 @@ class SpecialitySchedule extends Component
         $this->validate();
 
         $this->medicalSpecialty = MedicalSpecialty::find($this->medicalSpecialtyId);
-        
-        return redirect()->route('schedule', [
+
+        return $this->redirectRoute('schedule', [
             'medicalSpecialty' => $this->medicalSpecialty,
             'tipo' => $this->type
-        ]);
+        ], navigate: true);
     }
 }

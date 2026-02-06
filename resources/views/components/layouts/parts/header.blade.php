@@ -2,18 +2,19 @@
 
 <!-- Header -->
 <header
+    id="app-header"
     x-data="{
         open: false
     }"
     class="max-w-7xl mx-auto absolute inset-x-0 top-0 z-50">
     <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
-            <a href="{{ route('home') }}" class="-m-1.5 p-1.5 text-white flex items-center flex-col">
+            <a href="{{ route('home') }}" wire:navigate class="-m-1.5 p-1.5 text-white flex items-center flex-col">
                 <img class="h-12 w-auto" src="{{ asset('logo/cima-color.svg') }}" alt="{{ config('app.name', 'Laravel') }}">
                 <span class="text-base leading-none sr-only">{{ config('app.name', 'Laravel') }}</span>
             </a>
         </div>
-        @if (!$simple)            
+        @if (!$simple)
             <div class="flex lg:hidden">
                 <button type="button"
                     @click="open = !open"
@@ -34,19 +35,19 @@
                 "hidden lg:flex lg:gap-x-12",
                 "text-white" => request()->routeIs('home') || request()->routeIs('schedule.index')
             ])>
-                <a href="{{ route('schedule.index') }}" class="text-base tx:text-lg font-semibold leading-6">
+                <a href="{{ route('schedule.index') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
                     {{ __('Agenda tu hora') }}
                 </a>
 
-                <a href="{{ route('contact') }}" class="text-base tx:text-lg font-semibold leading-6">
+                <a href="{{ route('contact') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
                     {{ __('Tratamiento de fertilidad') }}
                 </a>
 
-                <a href="{{ route('about') }}" class="text-base tx:text-lg font-semibold leading-6">
+                <a href="{{ route('about') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
                     {{ __('Quienes somos') }}
                 </a>
 
-                <a href="{{ route('contact') }}" class="text-base tx:text-lg font-semibold leading-6">
+                <a href="{{ route('contact') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
                     {{ __('Nuestra clínica') }}
                 </a>
             </div>
@@ -65,7 +66,7 @@
             x-transition:leave-end="opacity-0"
             class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[#F9FAF5] px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div class="flex items-center justify-between">
-                <a href="{{ route('home') }}" class="-m-1.5 p-1.5">
+                <a href="{{ route('home') }}" wire:navigate class="-m-1.5 p-1.5">
                     <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
                     <img class="h-12 w-auto" src="{{ asset('logo/cima-color.svg') }}"
                         alt="{{ config('app.name', 'Laravel') }}">
@@ -84,15 +85,15 @@
             <div class="mt-6 flow-root">
                 <div class="-my-6 divide-y divide-gray-500/10">
                     <div class="space-y-2 py-6">
-                        <a href="{{ route('schedule.index') }}" class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                        <a href="{{ route('schedule.index') }}" wire:navigate class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                             {{ __('Agenda tu hora') }}
                         </a>
-                        
-                        <a href="{{ route('about') }}" class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+
+                        <a href="{{ route('about') }}" wire:navigate class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                             {{ __('Quienes somos') }}
                         </a>
-                        
-                        <a href="{{ route('contact') }}" class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+
+                        <a href="{{ route('contact') }}" wire:navigate class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                             {{ __('Contact') }}
                         </a>
                     </div>

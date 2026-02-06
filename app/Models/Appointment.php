@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Str;
 use App\Casts\StatusCast;
 use Illuminate\Database\Eloquent\Builder;
@@ -84,6 +85,14 @@ class Appointment extends Model
     public function medicalSpecialty(): BelongsTo
     {
         return $this->belongsTo(MedicalSpecialty::class);
+    }
+
+    /**
+     * Get the transactions for the appointment (e.g. payment receipts).
+     */
+    public function transactions(): MorphMany
+    {
+        return $this->morphMany(Transaction::class, 'transactionable');
     }
 
     /**

@@ -5,7 +5,7 @@
                 Reserva cancelada de {{ $appointment->medicalSpecialty->name }}
             </h1>
             <p class="mt-2 text-sm text-gray-500">
-                La reserva de la cita con el profesional <strong>{{ $appointment->professional->full_name }}</strong> está programada para el <strong>{{ $appointment->start_at->format('d/m/Y') }}</strong> a las <strong>{{ $appointment->start_at->format('H:i') }}</strong>. La cita está cancelada.
+                La cita con el profesional <strong>{{ $appointment->professional->full_name }}</strong> estaba programada para el <strong>{{ $appointment->start_at->format('d/m/Y') }}</strong> a las <strong>{{ $appointment->start_at->format('H:i') }}</strong>. La reserva ha sido cancelada.
             </p>
         </div>
     </div>

@@ -5,53 +5,72 @@
             Estamos aquí para ayudarte
         </p>
         <div class="mt-16 flex flex-col gap-10  sm:gap-y-20 lg:flex-row">
-            <form action="#" method="POST" class="lg:flex-auto">
+            <form wire:submit="submit" class="lg:flex-auto">
+                @if (session('contact.success'))
+                    <div class="mb-6 rounded-md bg-green-50 p-4 text-sm text-green-800 ring-1 ring-green-200">
+                        {{ session('contact.success') }}
+                    </div>
+                @endif
+
                 <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <div>
-                        <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">
+                        <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">
                             {{ __('Nombre') }}
                         </label>
                         <div class="mt-2.5">
-                            <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                            <input type="text" wire:model="name" id="name" autocomplete="given-name"
                                 placeholder="Ej: Juan"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {{ $errors->has('name') ? 'ring-red-500 focus:ring-red-600' : 'ring-gray-300 focus:ring-indigo-600' }}">
                         </div>
+                        @error('name')
+                            <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
-                        <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">
+                        <label for="last_name" class="block text-sm font-semibold leading-6 text-gray-900">
                             {{ __('Apellido') }}
                         </label>
                         <div class="mt-2.5">
-                            <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                            <input type="text" wire:model="last_name" id="last_name" autocomplete="family-name"
                                 placeholder="Ej: Pérez"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {{ $errors->has('last_name') ? 'ring-red-500 focus:ring-red-600' : 'ring-gray-300 focus:ring-indigo-600' }}">
                         </div>
+                        @error('last_name')
+                            <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="col-span-full">
                         <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">
                             {{ __('Email') }}
                         </label>
                         <div class="mt-2.5">
-                            <input type="email" name="email" id="email"
+                            <input type="email" wire:model="email" id="email" autocomplete="email"
                                 placeholder="Ej: ejemplo@correo.com"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {{ $errors->has('email') ? 'ring-red-500 focus:ring-red-600' : 'ring-gray-300 focus:ring-indigo-600' }}">
                         </div>
+                        @error('email')
+                            <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="sm:col-span-2">
                         <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">
                             {{ __('Mensaje') }}
                         </label>
                         <div class="mt-2.5">
-                            <textarea id="message" name="message" rows="4"
+                            <textarea wire:model="message" id="message" rows="4"
                                 placeholder="Ej: Hola, necesito ayuda con..."
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {{ $errors->has('message') ? 'ring-red-500 focus:ring-red-600' : 'ring-gray-300 focus:ring-indigo-600' }}"></textarea>
                         </div>
+                        @error('message')
+                            <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="mt-10">
-                    <button type="submit"
-                        class="block w-full rounded-md bg-A1-default px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-A1-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Enviar
+                    <button type="submit" wire:loading.attr="disabled"
+                        class="block w-full rounded-md bg-A1-default px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-A1-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-70">
+                        <span wire:loading.remove wire:target="submit">{{ __('Enviar') }}</span>
+                        <span wire:loading wire:target="submit">{{ __('Enviando...') }}</span>
                     </button>
                 </div>
                 <p class="mt-4 text-sm leading-6 text-gray-500">

@@ -30,9 +30,19 @@ class Professional extends Model
         'user_id',
         'rut',
         'bio',
-        'phone'
+        'phone',
+        'consultation_fee',
     ];
-    
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'consultation_fee' => 'decimal:2',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -77,6 +87,16 @@ class Professional extends Model
     }
 
     /**
+     * Get the patients for the professional.
+     *
+     * @return HasMany
+     */
+    public function patients(): HasMany
+    {
+        return $this->hasMany(Patient::class);
+    }
+
+    /**
      * Get the bank accounts for the professional.
      *
      * @return HasMany
@@ -118,7 +138,7 @@ class Professional extends Model
     {
         return $this->hasMany(Appointment::class);
     }
-    
+
     /**
      * Scope para obtener los horarios de un profesional en un rango de fechas.
      *

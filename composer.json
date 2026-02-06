@@ -21,6 +21,7 @@
         "predis/predis": "^2.2",
         "rappasoft/laravel-livewire-tables": "^3.4",
         "rawilk/laravel-settings": "^3.3",
+        "rickdbcn/filament-email": "*",
         "saade/filament-fullcalendar": "^3.2",
         "spatie/laravel-activitylog": "^4.8",
         "spatie/laravel-medialibrary": "^11.9",
@@ -36,6 +37,9 @@
         "phpunit/phpunit": "^11.0.1"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/helpers.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
