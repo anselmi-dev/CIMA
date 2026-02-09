@@ -103,6 +103,14 @@ class AppointmentResource extends Resource
             ]);
     }
 
+    public static function getWidgets(): array
+    {
+        return [
+            \App\Filament\Resources\AppointmentResource\Widgets\TransferWidget::class,
+        ];
+    }
+
+
     public static function table(Table $table): Table
     {
         return $table
