@@ -72,6 +72,7 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Widgets\AppStats::class,
                 \App\Filament\Widgets\AppointmentChart::class,
                 \App\Filament\Widgets\CalendarWidget::class,
+                \App\Filament\Resources\AppointmentResource\Widgets\TransferWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

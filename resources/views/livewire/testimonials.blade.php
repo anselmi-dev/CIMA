@@ -11,7 +11,7 @@
                 <div class="-mt-8 sm:-mx-4 sm:columns-2 sm:text-[0] lg:columns-3">
                     @foreach ($testimonials as $testimonial)
                         <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-                            <figure class="rounded-2xl bg-gray-50 p-8 text-sm/6">
+                            <figure class="rounded-2xl bg-gray-100 p-8 text-sm/6">
                                 <blockquote class="text-gray-900">
                                     <p>"{{ $testimonial->content }}"</p>
                                 </blockquote>

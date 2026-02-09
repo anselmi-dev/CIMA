@@ -19,7 +19,7 @@ class AppointmentResource extends Resource
     protected static ?string $model = Appointment::class;
 
     protected static ?string $navigationGroup = 'Pacientes';
-    
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationBadge(): ?string
@@ -63,7 +63,7 @@ class AppointmentResource extends Resource
                     : Forms\Components\Hidden::make('professional_id')
                     ->default(fn () => auth()->user()->professional->id),
 
-                    
+
                 Forms\Components\Select::make('patient_id')
                     ->label(__('resources/appointment.labels.patient'))
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} {$record->lastname} ({$record->rut})")
@@ -88,12 +88,14 @@ class AppointmentResource extends Resource
                     ->prefixIcon('heroicon-o-calendar')
                     ->required(),
 
+
+
                 Forms\Components\Select::make('status')
                     ->label(__('resources/appointment.labels.status'))
                     ->options([
                         'pending' => __("status:pending"),
                         'scheduled' => __("status:scheduled"),
-                        'completed' => __("status:completed"),
+                        'confirmed' => __("status:confirmed"),
                         'cancelled' => __("status:cancelled"),
                     ])
                     ->default('pending')
@@ -137,6 +139,34 @@ class AppointmentResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->getStateUsing(fn (Appointment $record) => $record->status)
                     ->label(__('resources/appointment.labels.status'))->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('transfer_capture')
+                    ->label(__('Comprobante de Transferencia'))
+                    ->getStateUsing(function (Appointment $record) {
+                        $transaction = $record->transactions()
+                            ->where('method', 'transfer')
+                            ->latest()
+                            ->first();
+
+                        if ($transaction && $transaction->getFirstMediaUrl()) {
+                            return __('Ver Comprobante');
+                        }
+
+                        return null;
+                    })
+                    ->url(function (Appointment $record) {
+                        $transaction = $record->transactions()
+                            ->where('method', 'transfer')
+                            ->latest()
+                            ->first();
+
+                        return $transaction?->getFirstMediaUrl();
+                    })
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('primary')
+                    ->default('—')
+                    ->sortable(false)
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('resources/appointment.labels.created_at'))->dateTime()->sortable(),
             ])
             ->filters([
@@ -176,9 +206,13 @@ class AppointmentResource extends Resource
     {
         $query = parent::getEloquentQuery();
 
-        return $query->when(!app(\Illuminate\Contracts\Auth\Access\Gate::class)->allows('admin'), function ($query) {
+        $query = $query->when(!app(\Illuminate\Contracts\Auth\Access\Gate::class)->allows('admin'), function ($query) {
             return $query->where('professional_id', auth()->user()->professional->id);
         });
+
+        return $query->with(['transactions' => function ($query) {
+            $query->where('method', 'transfer')->latest();
+        }]);
     }
 
     public static function getPages(): array

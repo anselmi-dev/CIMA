@@ -32,7 +32,7 @@ class AppointmentToPatientCancel extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu cita médica ha sido cancelada',
+            subject: 'Tu cita médica ha sido cancelada | ' . $this->appointment->uuid,
         );
     }
 

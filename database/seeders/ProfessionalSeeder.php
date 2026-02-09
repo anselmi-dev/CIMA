@@ -13,6 +13,8 @@ class ProfessionalSeeder extends Seeder
      */
     public function run(): void
     {
-        Professional::factory()->count(10)->create(); 
+        if (Professional::count() === 0) {
+            Professional::factory()->count(10)->create();
+        }
     }
 }

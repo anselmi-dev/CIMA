@@ -33,7 +33,7 @@ class AppointmentToPatientCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu cita médica está pendiente de confirmación',
+            subject: 'Tu cita médica está pendiente de confirmación | ' . $this->appointment->uuid,
         );
     }
 

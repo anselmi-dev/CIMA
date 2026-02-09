@@ -14,7 +14,7 @@ class MedicalSpecialty extends Model
 
     use HasSlug;
 
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = ['name', 'slug', 'description', 'content'];
 
     public function professionals()
     {

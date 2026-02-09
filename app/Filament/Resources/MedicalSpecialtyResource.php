@@ -60,7 +60,22 @@ class MedicalSpecialtyResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->label(__('resources/medical_speciality.labels.description'))
                     ->maxLength(1000)
+                    ->columnSpanFull(),
+                Forms\Components\RichEditor::make('content')
+                    ->label(__('resources/medical_speciality.labels.content'))
                     ->columnSpanFull()
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'strike',
+                        'link',
+                        'bulletList',
+                        'orderedList',
+                        'h2',
+                        'h3',
+                        'blockquote',
+                    ])
             ]);
     }
 

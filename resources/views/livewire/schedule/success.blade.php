@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="text-center">
                                                 <p class="text-sm text-gray-500">
-                                                    Solo tienes {{ $appointment->start_at->diffInHours(now()) }} horas para confirmar tu reserva. Si cancelas la reserva, no podrás recuperarla.
+                                                    Si cancelas la reserva, no podrás recuperarla.
                                                 </p>
                                             </div>
                                         </div>

@@ -11,6 +11,7 @@ return [
         'id' => 'ID',
         'name' => 'Nombre',
         'description' => 'Descripción',
+        'content' => 'Contenido',
         'created_at' => 'Fecha de creación',
         'updated_at' => 'Fecha de actualización',
     ],

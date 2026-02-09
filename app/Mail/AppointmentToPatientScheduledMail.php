@@ -32,7 +32,7 @@ class AppointmentToPatientScheduledMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu cita médica ha sido agendada',
+            subject: 'Tu cita médica ha sido agendada | ' . $this->appointment->uuid,
         );
     }
 

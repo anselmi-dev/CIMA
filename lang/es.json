@@ -278,6 +278,7 @@
     "Contact": "Contacto",
     "status:pending": "Pendiente",
     "status:scheduled": "Programado",
+    "status:confirmed": "Confirmada",
     "status:completed": "Finalizada",
     "status:cancelled": "Cancelada"
 }

@@ -32,23 +32,23 @@
                 </button>
             </div>
             <div @class([
-                "hidden lg:flex lg:gap-x-12",
+                "hidden lg:flex lg:gap-x-12 items-center",
                 "text-white" => request()->routeIs('home') || request()->routeIs('schedule.index')
             ])>
-                <a href="{{ route('schedule.index') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
-                    {{ __('Agenda tu hora') }}
-                </a>
-
-                <a href="{{ route('contact') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
-                    {{ __('Tratamiento de fertilidad') }}
-                </a>
-
                 <a href="{{ route('about') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
                     {{ __('Quienes somos') }}
                 </a>
 
                 <a href="{{ route('contact') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6">
-                    {{ __('Nuestra clínica') }}
+                    {{ __('Contactanos') }}
+                </a>
+
+
+                <a href="{{ route('schedule.index') }}" wire:navigate class="text-base tx:text-lg font-semibold leading-6 bg-A1-600 text-white px-4 py-2 rounded-md inline-flex items-center">
+                    {{ __('Agenda tu hora') }}
+                    <svg class="size-4 ml-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                 </a>
             </div>
         @endif
